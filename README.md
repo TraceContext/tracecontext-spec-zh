@@ -19,8 +19,9 @@ TODO: add link here
 TODO: add link here
 
 ## Why are we doing this?
-* If this becomes popular, frameworks and other services will automatically pass trace IDs through for correlated requests. This would prevent traces from hitting dead ends when a request reaches an un-instrumented service.
-* Once aligned on a header name, we can ask for a CORS exception from the W3C. This would allow browsers to attach trace IDs to requests and submit tracing data to a distributed tracing service.
-* Loggers can reliably parse trace / span IDs and include them in logs for correlation purposes.
-* Customers can use multiple tracing solutions (Zipkin + New Relic) at the same time and not have to worry about propagating two sets of context headers.
-* Frameworks can *bless* access to the trace context even if they prevent access to underlying request headers, making it available by default.
+* 如果这份规范被大家接受，框架和其他服务帮助传递这些ID，这样可以避免当一个请求经过一个没有被追踪的服务时，调用链断裂。
+* 一旦我们在header名称上达成一致，我们可以向W3C请求，将这些名称加入到CORS（跨域资源共享，Cross-Origin Resource Sharing）允许的header名称中。这样允许浏览器将追踪到的请求信息，发送到一个分布式追踪服务上。
+* 日志系统确定请求中的trace和span id,并将它们加入到日志中，用于后续关联分析。
+* 用户可以同时使用多个追踪系统 (如 Zipkin + New Relic)，而不用担心需要传输两种类型的上下文头信息。
+* 某些框架默认会禁止访问请求头信息，利用这份协议，框架可以默认放行这些请求头。
+
